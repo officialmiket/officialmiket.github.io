@@ -8,7 +8,7 @@
      
    <h2>Basic info</h2>
      
-   <p>The good stuff is the good stuff we can agree that the good stuff is good also we can agree that i live in saudi arabia</p>
+   <p>The good stuff is the good stuff we can agree that the good stuff is good</p>
    
    </body>
 </html>
