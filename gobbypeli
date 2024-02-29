@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Gobby peli</title>
+    <meta charset="UTF-8">
+    <style>
+        body {
+            background-color: seagreen;
+            text-align: center;
+        }
+    </style>
+    <script>
+        var gobby = 0;
+        var gobbyteho = 1;
+        var gobbyfarm = 1;
+        function gobbymore() {
+            gobby = gobby + gobbyteho;
+            document.getElementById("gobbypoints").innerHTML = gobby;
+            document.getElementById("gobbyfarmer").innerHTML = gobbyfarm;
+            if (gobby > 30) {
+                document.getElementById("gobbybutton").removeAttribute("hidden");
+            }
+            if (gobby > 100) {
+                document.getElementById("gobbyfarmer").removeAttribute("hidden");
+            }
+        }
+
+        function gobbydouble() {
+            gobbyteho = gobbyteho * 2;
+            gobby = 0
+            document.getElementById("gobbybutton").setAttribute("hidden","hidden")
+        }
+
+        function gobbyfarm() {
+            gobbyfarm = gobbyfarm + 1
+            setInterval(gobbytimer, 1000);
+            function gobbytimer() {
+                gobby = gobby + 1;
+            }
+            gobby = gobby - 100
+            document.getElementById("gobbyfarmer").setAttribute("hidden","hidden")
+        }
+
+    </script>
+</head>
+
+<body>
+    <h1>Gobby peli</h1>
+    <p>
+        <img src="Gobbye.jpg" onclick="gobbymore()">
+    </p>
+    <p>Sinulla on <span id="gobbypoints">0</span> Gobby</p>
+    <p>Sinulla on <span id="gobbyfarm">0</span> Gobbyfarmeja </p>
+    <p>
+        <button id="gobbybutton" hidden onclick="gobbydouble()">Gobby stealer</button>
+    </p>
+    <p>
+        <button id="gobbyfarmer" hidden onclick="gobbyfarm()">Gobby farmer</button>
+    </p>
+</body>
+
+</html>
