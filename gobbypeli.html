@@ -13,7 +13,7 @@
     <script>
         var gobby = 0;
         var gobbyteho = 1;
-        var gobbyfarm = 1;
+        var gobbyfarmer = 0;
         function gobbymore() {
             gobby = gobby + gobbyteho;
             document.getElementById("gobbypoints").innerHTML = gobby;
@@ -21,7 +21,7 @@
             if (gobby > 30) {
                 document.getElementById("gobbybutton").removeAttribute("hidden");
             }
-            if (gobby > 100) {
+            if (gobby > 10) {
                 document.getElementById("gobbyfarmer").removeAttribute("hidden");
             }
         }
@@ -33,14 +33,16 @@
         }
 
         function gobbyfarm() {
-            gobbyfarm = gobbyfarm + 1
+            gobbyfarm++;
             setInterval(gobbytimer, 1000);
             function gobbytimer() {
                 gobby = gobby + 1;
+                document.getElementById("gobbypoints").innerHTML = gobby;
             }
-            gobby = gobby - 100
+            gobby = gobby - 10
             document.getElementById("gobbyfarmer").setAttribute("hidden","hidden")
         }
+
 
     </script>
 </head>
@@ -51,12 +53,11 @@
         <img src="Gobbye.jpg" onclick="gobbymore()">
     </p>
     <p>Sinulla on <span id="gobbypoints">0</span> Gobby</p>
-    <p>Sinulla on <span id="gobbyfarm">0</span> Gobbyfarmeja </p>
     <p>
         <button id="gobbybutton" hidden onclick="gobbydouble()">Gobby stealer</button>
     </p>
     <p>
-        <button id="gobbyfarmer" hidden onclick="gobbyfarm()">Gobby farmer</button>
+        <button id="gobbyfarmer" hidden onclick="gobbyfarm()">Gobby farmers</button>
     </p>
 </body>
 
