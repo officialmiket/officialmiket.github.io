@@ -18,7 +18,7 @@
             gobby = gobby + gobbyteho;
             document.getElementById("gobbypoints").innerHTML = gobby;
             document.getElementById("gobbyfarmer").innerHTML = gobbyfarm;
-            if (gobby > 30) {
+            if (gobby > 30 && gobbyteho < 6) {
                 document.getElementById("gobbybutton").removeAttribute("hidden");
             }
             if (gobby > 10) {
