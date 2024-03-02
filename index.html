@@ -13,16 +13,18 @@
     <script>
         var gobby = 0;
         var gobbyteho = 1;
-        var gobbyfarmer = 0;
+        var gobbyfarmCount = 0;
+        var gobbyFarmInterval;
         function gobbymore() {
             gobby = gobby + gobbyteho;
             document.getElementById("gobbypoints").innerHTML = gobby;
-            document.getElementById("gobbyfarmer").innerHTML = gobbyfarm;
+            document.getElementById("gobbyfarmCount").innerHTML = gobbyfarmCount;
             if (gobby > 30 && gobbyteho < 6) {
                 document.getElementById("gobbybutton").removeAttribute("hidden");
             }
             if (gobby > 10) {
-                document.getElementById("gobbyfarmer").removeAttribute("hidden");
+                document.getElementById("gobbyfarmCount").innerHTML = "Gobby farm";
+                document.getElementById("gobbyfarmCount").removeAttribute("hidden");
             }
         }
 
@@ -33,14 +35,18 @@
         }
 
         function gobbyfarm() {
-            gobbyfarm++;
-            setInterval(gobbytimer, 1000);
+            gobbyfarmCount++;
+            gobbyFarmInterval = setInterval(gobbytimer, 1000);
             function gobbytimer() {
                 gobby = gobby + 1;
                 document.getElementById("gobbypoints").innerHTML = gobby;
+                if (gobby > 10) {
+                    document.getElementById("gobbyfarmCount").removeAttribute("hidden");
+                }
             }
             gobby = gobby - 10
-            document.getElementById("gobbyfarmer").setAttribute("hidden","hidden")
+            document.getElementById("gobbyfarmCount").setAttribute("hidden","hidden")
+            document.getElementById("gobbyfarmCounts").innerHTML = gobbyfarmCount
         }
 
 
@@ -50,14 +56,15 @@
 <body>
     <h1>Gobby peli</h1>
     <p>
-        <img src="Gobbye.jpg" onclick="gobbymore()">
+        <img src="GobbynoBG.png" onclick="gobbymore()">
     </p>
     <p>Sinulla on <span id="gobbypoints">0</span> Gobby</p>
+    <p>Sinulla on <span id="gobbyfarmCounts">0</span> gobby farmeja</p>
     <p>
         <button id="gobbybutton" hidden onclick="gobbydouble()">Gobby stealer</button>
     </p>
     <p>
-        <button id="gobbyfarmer" hidden onclick="gobbyfarm()">Gobby farmers</button>
+        <button id="gobbyfarmCount" hidden onclick="gobbyfarm()">Gobby farm</button>
     </p>
 </body>
 
