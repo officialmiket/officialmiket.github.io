@@ -21,6 +21,7 @@
         var gobbyteho = 1;
         var gobbyfarmCount = 0;
         var gobbyFarmIntervalId;
+        var Gamesavetimer;
         function gobbymore() {
             gobby = gobby + gobbyteho;
             document.getElementById("gobbypoints").innerHTML = gobby;
@@ -41,12 +42,10 @@
             gobbyteho = gobbyteho * 2;
             gobby = 0
             document.getElementById("gobbybutton").setAttribute("hidden","hidden")
-            saveGame();
         }
 
         function gobbyfarm() {
             gobbyfarmCount++;
-            saveGame();
             gobbytimer();
             gobbyFarmIntervalId = setInterval(gobbytimer, 1000);
             gobby = gobby - 10
@@ -84,6 +83,12 @@
              if (gobbyfarmCount > 0) {
             gobbyFarmIntervalId = setInterval(gobbytimer, 1000);
             }
+        }
+
+        function Savetimer () {
+            Gamesavetimer = setInterval(savetimer, 1000);
+            Gamesavetimer
+                saveGame();
         }
 
         window.onload = function() {
