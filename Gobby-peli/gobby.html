@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Gobby peli</title>
+    <meta charset="UTF-8">
+    <style>
+        body {
+            background-color: seagreen;
+            text-align: center;
+        }
+        .bottomleft {
+            position: absolute;
+            bottom: 8px;
+            left: 16px;
+            font-size: 18px;
+        }
+    </style>
+    <script>
+        var gobby = 0;
+        var gobbyteho = 1;
+        var gobbyfarmCount = 0;
+        var gobbyFarmIntervalId;
+        var Gamesavetimer;
+        function gobbymore() {
+            gobby = gobby + gobbyteho;
+            document.getElementById("gobbypoints").innerHTML = gobby;
+            document.getElementById("gobbyfarmCount").innerHTML = gobbyfarmCount;
+            if (gobby > 30 && gobbyteho < 6) {
+                document.getElementById("gobbybutton").removeAttribute("hidden");
+            }
+            if (gobby > 10) {
+                document.getElementById("gobbyfarmCount").innerHTML = "Gobby farm";
+                document.getElementById("gobbyfarmCount").removeAttribute("hidden");
+            }
+
+         
+         saveGame();
+        }
+
+        function gobbydouble() {
+            gobbyteho = gobbyteho * 2;
+            gobby = 0
+            document.getElementById("gobbybutton").setAttribute("hidden","hidden")
+        }
+
+        function gobbyfarm() {
+            gobbyfarmCount++;
+            gobbytimer();
+            gobbyFarmIntervalId = setInterval(gobbytimer, 1000);
+            gobby = gobby - 10
+            document.getElementById("gobbyfarmCount").setAttribute("hidden","hidden")
+            document.getElementById("gobbyfarmCounts").innerHTML = gobbyfarmCount
+        }
+        function gobbytimer() {
+                gobby = gobby + 1;
+                document.getElementById("gobbypoints").innerHTML = gobby;
+                if (gobby > 10) {
+                    document.getElementById("gobbyfarmCount").removeAttribute("hidden");
+                }
+            
+        }
+
+        function saveGame() {
+            localStorage.setItem("gobby", gobby);
+            localStorage.setItem("gobbyteho", gobbyteho);
+            localStorage.setItem("gobbyfarmCount", gobbyfarmCount);
+            // clear interval
+            localStorage.setItem("gobbyfarmIntervalId", gobbyFarmIntervalId);
+        }
+
+        function loadGame() {
+            gobby = parseInt(localStorage.getItem("gobby")) || 0;
+            gobbyteho = parseInt(localStorage.getItem("gobbyteho")) || 1;
+            gobbyfarmCount = parseInt(localStorage.getItem("gobbyfarmCount")) || 0;
+
+            // Update the displayed values
+            document.getElementById("gobbypoints").innerHTML = gobby;
+            document.getElementById("gobbyfarmCounts").innerHTML = gobbyfarmCount;
+
+            gobbyFarmIntervalId = parseInt(localStorage.getItem("gobbyfarmIntervalId"));
+                // Start the gobby farm interval again
+             if (gobbyfarmCount > 0) {
+            gobbyFarmIntervalId = setInterval(gobbytimer, 1000);
+            }
+        }
+
+        function Savetimer () {
+            Gamesavetimer = setInterval(savetimer, 1000);
+            Gamesavetimer
+                saveGame();
+        }
+
+        window.onload = function() {
+            loadGame();
+            Savetimer();
+        };
+
+        window.onbeforeunload = function() {
+            clearInterval(gobbyFarmIntervalId);
+            saveGame();
+        };
+
+    </script>
+</head>
+
+<body>
+    <h1>Gobby peli</h1>
+    <p>
+        <img src="Gobbye.jpg" onclick="gobbymore()">
+    </p>
+    <p>Sinulla on <span id="gobbypoints">0</span> Gobby</p>
+    <p>Sinulla on <span id="gobbyfarmCounts">0</span> gobby farmeja</p>
+    <p>
+        <button id="gobbybutton" hidden onclick="gobbydouble()">Gobby stealer</button>
+    </p>
+    <p>
+        <button id="gobbyfarmCount" hidden onclick="gobbyfarm()">Gobby farm</button>
+    </p>
+</body>
+
+</html>
