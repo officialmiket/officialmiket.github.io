@@ -23,8 +23,9 @@
         var gobby = 0;
         var gobbyteho = 1;
         var gobbyfarmCount = 0;
-        var gobbyFarmIntervalId;
+        var gobbyFarmIntervalId = [];
         var Gamesavetimer;
+        var gobbyfarmloader;
         function gobbymore() {
             gobby = gobby + gobbyteho;
             document.getElementById("gobbypoints").innerHTML = gobby;
@@ -64,11 +65,30 @@
             
         }
 
+        function startGobbyFarms() {
+            // Clear any existing farm intervals before starting new ones
+            clearGobbyFarms();
+
+            // Create and start multiple farm intervals based on gobbyfarmCount
+            for (let i = 0; i < gobbyfarmCount; i++) {
+                gobbyFarmIntervalId.push(setInterval(gobbytimer, 1000)); // Corrected variable name
+            }
+        }   
+
+        function clearGobbyFarms() {
+            if (Array.isArray(gobbyFarmIntervalId)) {
+                for (let intervalId of gobbyFarmIntervalId) {
+                    clearInterval(intervalId);
+                }
+            }
+            gobbyFarmIntervalId = [];
+        }
+
         function saveGame() {
             localStorage.setItem("gobby", gobby);
             localStorage.setItem("gobbyteho", gobbyteho);
             localStorage.setItem("gobbyfarmCount", gobbyfarmCount);
-            // clear interval
+            // clear interval not anymore
             localStorage.setItem("gobbyfarmIntervalId", gobbyFarmIntervalId);
         }
 
@@ -81,11 +101,10 @@
             document.getElementById("gobbypoints").innerHTML = gobby;
             document.getElementById("gobbyfarmCounts").innerHTML = gobbyfarmCount;
 
-            gobbyFarmIntervalId = parseInt(localStorage.getItem("gobbyfarmIntervalId"));
-                // Start the gobby farm interval again
-             if (gobbyfarmCount > 0) {
-            gobbyFarmIntervalId = setInterval(gobbytimer, 1000);
-            }
+            gobbyFarmIntervalId = JSON.parse(localStorage.getItem("gobbyfarmIntervalId")) || []; 
+            if (gobbyfarmCount > 0) {
+                startGobbyFarms(); // Start farms only if count is greater than 0
+            } 
         }
 
         function Savetimer () {
@@ -99,7 +118,7 @@
 
         window.onbeforeunload = function() {
             clearInterval(gobbyFarmIntervalId);
-            saveGame();
+            
         };
 
     </script>
