@@ -10,10 +10,15 @@
         .centered {
             text-align: center;
         }
+        .grad1 {
+          height: 100vh;
+          background-color: rgb(255, 168, 168); /* For browsers that do not support gradients */
+          background-image: linear-gradient(#ff0000, #ffa0a0);
+        }
 
     </style>
 </head>
-<body>
+<body class="grad1">
     <div class="container p-3 my-5 border bg-dark text-white">
         <h1>Samin Sick Rad Cool games (no affiliation to coolmath games)</h1>
     </div>
@@ -32,6 +37,8 @@
                 <button data-bs-toggle="collapse" data-bs-target="#demo2">Muistipeli</button>
                 <div id="demo2" class="collapse">
                     Testa muistiasi oletko parhain muistaja? <span class="text-primary" onclick="location.href='memory.html'">Klikkaa tästä</span>
+                    <br>
+                    Hieman riikinäinen versio mutta sattunainen versio. <span class="text-warning" onclick="location.href='memory-copy'">Klikkaa tästä</span>
                 </div>
             </div>
         </div>
