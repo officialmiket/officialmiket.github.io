@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Ristonolla</title>
+    <meta charset="UTF-8">
+    <style>
+        
+    </style>
+    <script>
+        let turn = 1;
+
+        function flipCard(event) {
+            if (turn==1) {
+                event.target.src = "Xkuva.png";
+                turn = 2;
+            }
+            else if (turn==2) {
+                event.target.src = "Okuva.png";
+                turn = 1;
+            }
+        }
+        function reset(event) {
+            turn = 1;
+        document.getElementById("1").src = "Truutu.png";
+        document.getElementById("2").src = "Truutu.png";
+        document.getElementById("3").src = "Truutu.png";
+        document.getElementById("4").src = "Truutu.png";
+        document.getElementById("5").src = "Truutu.png";
+        document.getElementById("6").src = "Truutu.png";
+        document.getElementById("7").src = "Truutu.png";
+        document.getElementById("8").src = "Truutu.png";
+        document.getElementById("9").src = "Truutu.png";
+        }
+    </script>
+</head>
+
+<body>
+    <h1>Ristonolla</h1>
+    <p>
+        <img src="Truutu.png" id="1" onclick="flipCard(event)">
+        <img src="Truutu.png" id="2" onclick="flipCard(event)">
+        <img src="Truutu.png" id="3" onclick="flipCard(event)">
+        <br>
+        <img src="Truutu.png" id="4" onclick="flipCard(event)">
+        <img src="Truutu.png" id="5" onclick="flipCard(event)">
+        <img src="Truutu.png" id="6" onclick="flipCard(event)">
+        <br>
+        <img src="Truutu.png" id="7" onclick="flipCard(event)">
+        <img src="Truutu.png" id="8" onclick="flipCard(event)">
+        <img src="Truutu.png" id="9" onclick="flipCard(event)">
+        <br>
+        <img src="Xkuva.png" onclick="reset()">
+    </p>
+</body>
+
+</html>
