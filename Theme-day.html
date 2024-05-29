@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            background-color: rgb(255, 255, 255);
+        }
+
+        .content {
+            height: 3000px; /* Ensure there's enough content to scroll */
+            position: relative;
+            text-align: center;
+        }
+        
+        .spacer {
+            height: 1000px; /* Adjust to control where the picture appears */
+        }
+
+        .scroll-picture {
+            opacity: 0; /* Make the picture invisible by default */
+            position: fixed;
+            top: 20%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1000;
+            width: 300px; /* Adjust size as needed */
+            height: auto;
+            transition: opacity 0.5s;
+            cursor: pointer; /* Add cursor pointer to indicate it's clickable */
+        }
+
+        .scroll-picture.visible {
+            opacity: 1; /* Make the picture visible */
+        }
+
+        .scroll-text {
+            opacity: 0; /* Make the text invisible by default */
+            position: relative;
+            z-index: 1000;
+            transition: opacity 0.5s;
+            color: white;
+        }
+
+        .scroll-text.visible {
+            opacity: 1; /* Make the text visible */
+        }
+    </style>
+    <script>
+        function myFunction() {
+            console.log("Image clicked"); // Debugging line
+            document.body.style.backgroundColor = "black";
+            document.querySelector('.content').style.backgroundColor = "black";
+            
+
+            // Select all elements with class name "spacer"
+            const spacers = document.querySelectorAll('.spacer');
+
+            // Loop through each spacer and change its background color
+            spacers.forEach(spacer => {
+                spacer.style.backgroundColor = "black";
+            });
+
+            const img = document.querySelector('.scroll-picture');
+            img.src = 'Bight.png'; // Ensure the image path is correct
+            console.log("Image source changed to: ", img.src);
+        }
+
+        window.addEventListener('scroll', function() {
+            const pictures = document.querySelectorAll('.scroll-picture');
+            const texts = document.querySelectorAll('.scroll-text');
+            const scrollY = window.scrollY || window.pageYOffset;
+
+            pictures.forEach(picture => {
+                const showPosition = parseInt(picture.getAttribute('data-show'));
+                const hidePosition = parseInt(picture.getAttribute('data-hide'));
+
+                if (scrollY > showPosition && scrollY < hidePosition) {
+                    picture.classList.add('visible');
+                } else {
+                    picture.classList.remove('visible');
+                }
+            });
+
+            texts.forEach(text => {
+                const showPosition = parseInt(text.getAttribute('data-show'));
+                const hidePosition = parseInt(text.getAttribute('data-hide'));
+
+                if (scrollY > showPosition && scrollY < hidePosition) {
+                    text.classList.add('visible');
+                } else {
+                    text.classList.remove('visible');
+                }
+            });
+        });
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lights</title>
+</head>
+<body>
+    <div class="content">
+        <h1>Tervetuloa menee alaspäin.</h1>
+        <div class="spacer"></div>
+        <img src="Light.png" alt="Lightbulb" class="scroll-picture" data-show="500" data-hide="2000" onclick="myFunction()">
+        <div class="spacer"></div>
+        <div class="spacer"></div>
+        <div class="spacer">
+            <h1 class="scroll-text" data-show="2500" data-hide="3500">Tiesitkö, että kun jätät sähkölaitteesi päälle lähtiessäsi pois talosta, se voi aiheuttaa noin 5-10 % lisäyksen sähkölaskuusi? Tämä tarkoittaisi noin 11 euron lisäystä kuukaudessa.</h1>
+            </div>
+        <div class="spacer"></div>
+        <div class="spacer">
+            <h1 class="scroll-text" data-show="4500" data-hide="5500">Vaikka ollaan rehellisiä, mitä voit ostaa nykyaikana edes 11 eurolla? Jonkin surkean Twix-patukan? Et sinä myöskään pelasta maailmaa sammuttamalla kaikki laitteet, kun kuitenkin vain 100 yhtiötä maailmassa aiheuttaa 70 % ilmastonmuutoksesta.</h1>
+        </div>
+        <div class="spacer"></div>
+        L
+        <div class="spacer"></div>
+    </div>
+</body>
+</html>
